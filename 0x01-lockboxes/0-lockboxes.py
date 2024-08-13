@@ -19,15 +19,22 @@ def canUnlockAll(boxes):
     keys_list = []
     keys_list.append(0)
     temp_list = []
-    # traverse the boxes and generate a list of keys
+
+    # empty list
+    if boxes == []:
+        return True
+    # get key/s in boxes[0] since its unlocked
     for key in boxes[0]:
-        if key not in keys_list:
+        if key not in keys_list and key < len(boxes):
             keys_list.append(key)
     # now unlock boxes of which we have keys
     for key in keys_list:
-        temp_list = boxes[key]
+        if key >= len(boxes):
+            continue
+        else:
+            temp_list = boxes[key]
         for unlock_key in temp_list:
-            if unlock_key not in keys_list:
+            if unlock_key not in keys_list and unlock_key < len(boxes):
                 keys_list.append(unlock_key)
     # print("length of keys_list=", len(keys_list))
     # print(keys_list)
