@@ -22,10 +22,18 @@ def minOperations(n):
     # the summ of all the prime factors is the same as the minimum number
     # of operations to get 'n' number of H characters
     sum_of_pime_factors = []
-    factors = [1,2]
+    factors = [2]
+    # print("factors", factors, type(factors))
+    if n <= 3:
+        return
     for pf in range(3, math.floor(n / 2), 2):
-        factors.append(pf)
+        for i in range(2, pf):
+            if pf % i == 0:
+                break
+            else:
+                if pf not in factors:
+                    factors.append(pf)
     print("factors list", factors)
-    while True:
-        for pf in factors:
+    # while True:
+    #    for pf in factors:
 
