@@ -22,7 +22,6 @@
 
 import signal
 import sys
-from time import sleep
 
 
 # define status codes with counters and a line counter
@@ -54,7 +53,8 @@ try:
             # print_report
             print_report(codes, file_size)
             line_counter = 0
-except KeyboardInterrupt:
+except Exception as err:
+    pass
+finally:
     # crrl-c pressed, print report and exit
     print_report(codes, file_size)
-    raise
