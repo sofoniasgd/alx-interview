@@ -42,7 +42,7 @@ try:
     for line in sys.stdin:
         # for every line either extract data or print if 10th line is reached
         word_list = line.split(" ")
-        if len(word_list) > 4:
+        if len(word_list) == 9:
             # update status data
             file_size += int(word_list[-1])
             if word_list[-2] in codes.keys():
