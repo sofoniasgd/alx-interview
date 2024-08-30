@@ -50,9 +50,10 @@ try:
                 file_size += int(word_list[-1])
                 if word_list[-2] in codes.keys():
                     codes[word_list[-2]] += 1
-finally:
+except KeyboardInterrupt:
     # crrl-c pressed, print report and exit
     print("File size: {}".format(file_size))
     for key, value in codes.items():
         if value > 0:
             print("{}: {}".format(key, value))
+    raise
