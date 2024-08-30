@@ -25,13 +25,13 @@ import sys
 from time import sleep
 
 
-try:
-    # define status codes with counters and a line counter
-    codes = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0, "404": 0,
-             "405": 0, "500": 0}
-    file_size = 0
-    line_counter = 0
+# define status codes with counters and a line counter
+codes = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0, "404": 0,
+         "405": 0, "500": 0}
+file_size = 0
+line_counter = 0
 
+try:
     for line in sys.stdin:
         # for every line either extract data or print if 10th line is reached
         if line_counter == 10:
@@ -52,8 +52,9 @@ try:
                 file_size += int(word_list[-1])
                 if word_list[-2] in codes.keys():
                     codes[word_list[-2]] += 1
-    sleep(1)
-except KeyboardInterrupt:
+except Exception as e:
+    pass
+finally:
     # crrl-c pressed, print report and exit
     sys.stdout.write("File size: {}\n".format(file_size))
     sys.stdout.flush()
