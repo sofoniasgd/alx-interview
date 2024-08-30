@@ -36,12 +36,10 @@ try:
         # for every line either extract data or print if 10th line is reached
         if line_counter == 10:
             # print_report
-            sys.stdout.write("File size: {}\n".format(file_size))
-            sys.stdout.flush()
+            print("File size: {}".format(file_size))
             for key, value in codes.items():
                 if value > 0:
-                    sys.stdout.write("{}: {}\n".format(key, value))
-                    sys.stdout.flush()
+                    print("{}: {}".format(key, value))
             line_counter = 0
         else:
             line_counter += 1
@@ -52,14 +50,9 @@ try:
                 file_size += int(word_list[-1])
                 if word_list[-2] in codes.keys():
                     codes[word_list[-2]] += 1
-except Exception as e:
-    pass
 finally:
     # crrl-c pressed, print report and exit
-    sys.stdout.write("File size: {}\n".format(file_size))
-    sys.stdout.flush()
+    print("File size: {}".format(file_size))
     for key, value in codes.items():
         if value > 0:
-            sys.stdout.write("{}: {}\n".format(key, value))
-            sys.stdout.flush()
-    sys.stdout.flush()
+            print("{}: {}".format(key, value))
