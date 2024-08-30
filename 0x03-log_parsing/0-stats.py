@@ -31,29 +31,30 @@ codes = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0, "404": 0,
 file_size = 0
 line_counter = 0
 
+
+def print_report(code_dict, file_size):
+    """ prints stat"""
+    print("File size: {}".format(file_size))
+    for key, value in code_dict.items():
+        if value > 0:
+            print("{}: {}".format(key, value))
+
 try:
     for line in sys.stdin:
         # for every line either extract data or print if 10th line is reached
+        word_list = line.split(" ")
+        if len(word_list) == 9:
+            # update status data
+            file_size += int(word_list[-1])
+            if word_list[-2] in codes.keys():
+                codes[word_list[-2]] += 1
+        line_counter += 1
+
         if line_counter == 10:
             # print_report
-            print("File size: {}".format(file_size))
-            for key, value in codes.items():
-                if value > 0:
-                    print("{}: {}".format(key, value))
+            print_report(codes, file_size)
             line_counter = 0
-        else:
-            line_counter += 1
-            # update_report
-            word_list = line.split(" ")
-            if len(word_list) == 9:
-                # update status data
-                file_size += int(word_list[-1])
-                if word_list[-2] in codes.keys():
-                    codes[word_list[-2]] += 1
 except KeyboardInterrupt:
     # crrl-c pressed, print report and exit
-    print("File size: {}".format(file_size))
-    for key, value in codes.items():
-        if value > 0:
-            print("{}: {}".format(key, value))
+    print_report(codes, file_size)
     raise
