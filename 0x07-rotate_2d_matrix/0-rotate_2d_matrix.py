@@ -1,35 +1,24 @@
 #!/usr/bin/python3
-"""Rotate 2d Matrix"""
+'''2D matrix'''
 
 
 def rotate_2d_matrix(matrix):
-    """Given an n x n 2D matrix
-    rotate it 90 degrees clockwise.
-    Args:
-        matrix (list)
-    Does not return anything. The matrix must be edited in-place.
-    matrix will have two dimensions and is not empty
-    """
-    # print original matrix
-    for row in matrix:
-        print(row)
-    row = []
-    column = []
-    # 90 degree rotation can be achieved using swapping inplace
-    # conditions:
-    #   swap when index is only different digits eg.01, 21
-    #   then finally reverse the rows
-    if len(matrix) == 2:
-        print("doesnt apply for now")
-    index = len(matrix)
-    for row in range(0, len(matrix) - 1):
-        for col in range(0, len(matrix) - 1):
-            if row < col:
-                tmp = matrix[row][col]
-                matrix[row][col] = matrix[col][row]
-                matrix[col][row] = tmp
-    # finaly reverse the rows
-    for row in matrix:
-        row = row.reverse()
+    '''rotates a 2d matrix 90° clockwise
+    Returns: Nothing'''
+    left, right = 0, len(matrix) - 1
 
-
+    while left < right:
+        for i in range(right - left):
+            top, bottom = left, right
+            # save topleft  value
+            topLeft = matrix[top][left + i]
+            # move bottom left to top left
+            matrix[top][left + i] = matrix[bottom - i][left]
+            # move bottom right to bottom left
+            matrix[bottom - i][left] = matrix[bottom][right - i]
+            # move top right to bottom right
+            matrix[bottom][right - i] = matrix[top + i][right]
+            # move top left to top right
+            matrix[top + i][right] = topLeft
+        right -= 1
+        left += 1
