@@ -20,6 +20,8 @@ def makeChange(coins, total):
     # if there exists a remainder after the last diviion(smallest coin value)
     # then theres no solution
     amount = 0
+    if total <= 0:
+        return 0
     if not coins or total < coins[-1]:
         return -1
     for value in coins:
